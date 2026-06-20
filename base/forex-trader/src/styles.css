@@ -1,0 +1,381 @@
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-2: #1f2630;
+  --border: #2d333b;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --up: #2ea36f;
+  --down: #d84a4a;
+  --accent: #3b82f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  padding-bottom: 72px;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+/* Pair tabs */
+.pair-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.pair-tabs__tab {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pair-tabs__tab--active {
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+/* Ticker */
+.ticker {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.ticker--loading {
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.ticker__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ticker__pair {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ticker__change {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ticker__price {
+  font-size: 36px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin: 8px 0;
+}
+
+.ticker__spread {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Chart */
+.chart {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.chart--loading {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  color: var(--text-dim);
+}
+
+.chart svg {
+  display: block;
+  width: 100%;
+  height: 220px;
+}
+
+.chart__grid {
+  stroke: var(--border);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.chart__scale {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.candle--up .candle__body,
+.candle--up .candle__wick {
+  fill: var(--up);
+  stroke: var(--up);
+}
+
+.candle--down .candle__body,
+.candle--down .candle__wick {
+  fill: var(--down);
+  stroke: var(--down);
+}
+
+/* Trade panel */
+.trade-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trade-panel__sizes {
+  display: flex;
+  gap: 8px;
+}
+
+.chip {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chip--active {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.trade-panel__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 14px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+}
+
+.btn--buy {
+  background: var(--up);
+}
+
+.btn--sell {
+  background: var(--down);
+}
+
+.btn__label {
+  font-size: 15px;
+}
+
+.btn__price {
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+.trade-panel__confirmation {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.trade-panel__error {
+  margin: 0;
+  font-size: 13px;
+  color: var(--down);
+  text-align: center;
+}
+
+/* Sections, positions, trades */
+.section__title,
+.page-header__title {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.page-header__subtitle {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.empty {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+.positions,
+.trades {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.positions__row,
+.trades__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.positions__left,
+.trades__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.positions__right,
+.trades__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.positions__pair,
+.trades__pair {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.positions__entry,
+.trades__detail {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.trades__time {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.tag--long {
+  background: rgba(46, 163, 111, 0.15);
+  color: var(--up);
+}
+
+.tag--short {
+  background: rgba(216, 74, 74, 0.15);
+  color: var(--down);
+}
+
+.pl {
+  font-weight: 700;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pl--up {
+  color: var(--up);
+}
+
+.pl--down {
+  color: var(--down);
+}
+
+/* Bottom nav */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
+}
+
+.bottom-nav__link {
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.bottom-nav__link--active {
+  color: var(--accent);
+}
